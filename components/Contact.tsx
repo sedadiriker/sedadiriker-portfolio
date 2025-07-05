@@ -11,10 +11,15 @@ export default function Contact() {
     message: "",
   });
   const [hover, setHover] = useState(false);
+  const [lineVisible, setLineVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const lineRef = useRef<HTMLDivElement | null>(null);
-  const [lineVisible, setLineVisible] = useState(false);
-
+interface FormspreeError {
+  message: string;
+}
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,8 +46,48 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
 
+    try {
+      const form = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        form.append(key, value);
+      });
 
+      const res = await fetch("https://formspree.io/f/mrbkvejy", {
+        method: "POST",
+        body: form,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({
+          name: "",
+          surname: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else if (data.errors) {
+  setError(data.errors.map((err: FormspreeError) => err.message).join(", "));
+      } else {
+        setError("Mesaj gönderilirken hata oluştu.");
+      }
+    } catch {
+      setError("Mesaj gönderilirken hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="h-screen flex flex-col justify-center items-center px-6 w-7xl max-w-7xl text-center">
@@ -52,7 +97,6 @@ export default function Contact() {
       >
         İletişim
       </h2>
-      {/* Animasyonlu çizgi */}
       <div
         className={`h-1 bg-[#E38422] rounded-full mx-auto mb-8 transition-all duration-1000 ease-in-out ${
           lineVisible ? "w-24 opacity-100" : "w-0 opacity-0"
@@ -60,12 +104,10 @@ export default function Contact() {
       />
 
       <form
-        action="https://formspree.io/f/mrbkvejy"
+        onSubmit={handleSubmit}
         className="w-full flex flex-col gap-5 text-left"
         noValidate
-          method="POST" 
       >
-        {/* Ad ve Soyad yan yana */}
         <div className="flex flex-col md:flex-row gap-4">
           <input
             id="name"
@@ -76,6 +118,7 @@ export default function Contact() {
             onChange={handleChange}
             className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
             required
+            disabled={loading}
           />
           <input
             id="surname"
@@ -86,6 +129,7 @@ export default function Contact() {
             onChange={handleChange}
             className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
             required
+            disabled={loading}
           />
           <input
             id="subject"
@@ -95,18 +139,19 @@ export default function Contact() {
             value={formData.subject}
             onChange={handleChange}
             className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+            disabled={loading}
           />
           <input
-  id="email"
-  name="email"
-  type="email"
-  placeholder="Email adresiniz"
-  value={formData.email}
-  onChange={handleChange}
-  className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-  required
-/>
-
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email adresiniz"
+            value={formData.email}
+            onChange={handleChange}
+            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+            required
+            disabled={loading}
+          />
         </div>
 
         <textarea
@@ -118,22 +163,32 @@ export default function Contact() {
           onChange={handleChange}
           className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition resize-none"
           required
+          disabled={loading}
         />
 
-
+        {error && (
+          <p className="text-red-600 font-medium text-sm mt-2">{error}</p>
+        )}
+        {success && (
+          <p className="text-green-600 font-medium text-sm mt-2">
+            Mesajınız başarıyla gönderildi!
+          </p>
+        )}
 
         <button
           type="submit"
+          disabled={loading}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           className={`relative inline-block px-6 py-3 font-semibold rounded-md overflow-hidden cursor-pointer
-    text-[#E38422] bg-transparent
-    hover:text-white hover:bg-[#47586F]
-    disabled:opacity-60 disabled:cursor-not-allowed
-    transition-colors duration-300 w-[30%] mx-auto
-  `}
+            text-[#E38422] bg-transparent
+            hover:text-white hover:bg-[#47586F]
+            disabled:opacity-60 disabled:cursor-not-allowed
+            transition-colors duration-300 w-[30%] mx-auto
+          `}
           aria-label="Mesajı Gönder"
         >
+          {loading ? "Gönderiliyor..." : "Gönder"}
 
           {/* Border lines */}
           <span
