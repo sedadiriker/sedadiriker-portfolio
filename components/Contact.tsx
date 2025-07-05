@@ -10,9 +10,6 @@ export default function Contact() {
     subject: "",
     message: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [hover, setHover] = useState(false);
 
   const lineRef = useRef<HTMLDivElement | null>(null);
@@ -45,6 +42,8 @@ export default function Contact() {
   }
 
 
+
+
   return (
     <div className="h-screen flex flex-col justify-center items-center px-6 w-7xl max-w-7xl text-center">
       <h2
@@ -61,58 +60,54 @@ export default function Contact() {
       />
 
       <form
-         action="https://formspree.io/f/mrbkvejy"
+        action="https://formspree.io/f/mrbkvejy"
         className="w-full flex flex-col gap-5 text-left"
         noValidate
           method="POST" 
       >
         {/* Ad ve Soyad yan yana */}
         <div className="flex flex-col md:flex-row gap-4">
-  <input
-    id="name"
-    name="name"
-    type="text"
-    placeholder="Adınız"
-    value={formData.name}
-    onChange={handleChange}
-    disabled={loading}
-    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-    required
-  />
-  <input
-    id="surname"
-    name="surname"
-    type="text"
-    placeholder="Soyadınız"
-    value={formData.surname}
-    onChange={handleChange}
-    disabled={loading}
-    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-    required
-  />
-  <input
-    id="email"
-    name="email"
-    type="email"
-    placeholder="Email adresiniz"
-    value={formData.email}
-    onChange={handleChange}
-    disabled={loading}
-    required
-    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-  />
-  <input
-    id="subject"
-    name="subject"
-    type="text"
-    placeholder="Konu"
-    value={formData.subject}
-    onChange={handleChange}
-    disabled={loading}
-    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-  />
-</div>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Adınız"
+            value={formData.name}
+            onChange={handleChange}
+            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+            required
+          />
+          <input
+            id="surname"
+            name="surname"
+            type="text"
+            placeholder="Soyadınız"
+            value={formData.surname}
+            onChange={handleChange}
+            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+            required
+          />
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            placeholder="Konu"
+            value={formData.subject}
+            onChange={handleChange}
+            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+          />
+          <input
+  id="email"
+  name="email"
+  type="email"
+  placeholder="Email adresiniz"
+  value={formData.email}
+  onChange={handleChange}
+  className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+  required
+/>
 
+        </div>
 
         <textarea
           id="message"
@@ -121,21 +116,14 @@ export default function Contact() {
           placeholder="Mesajınızı yazın"
           value={formData.message}
           onChange={handleChange}
-          disabled={loading}
           className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition resize-none"
           required
         />
 
-        {error && <p className="text-red-600 font-medium text-sm">{error}</p>}
-        {success && (
-          <p className="text-green-600 font-medium text-sm">
-            Mesajınız başarıyla gönderildi!
-          </p>
-        )}
+
 
         <button
           type="submit"
-          disabled={loading}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
           className={`relative inline-block px-6 py-3 font-semibold rounded-md overflow-hidden cursor-pointer
@@ -146,7 +134,6 @@ export default function Contact() {
   `}
           aria-label="Mesajı Gönder"
         >
-          {loading ? "Gönderiliyor..." : "Gönder"}
 
           {/* Border lines */}
           <span
