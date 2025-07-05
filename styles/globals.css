@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+@keyframes growLine {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 96px;
+    opacity: 1;
+  }
+}
+
+.line-animate {
+  animation: growLine 1s ease-out forwards;
+}
+
+@keyframes fillBar {
+  0% {
+    width: 0%;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fill-animate {
+  animation: fillBar 1.5s ease-out forwards;
+}
+
+
+
+
+
