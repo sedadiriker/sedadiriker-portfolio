@@ -64,7 +64,7 @@ export default function SocialIcons() {
 `}</style>
 
 <div className="fixed top-0 right-4 h-screen flex flex-col items-center justify-center gap-6 z-50">
-  {icons.map(({ href, label, icon, isButton }, index) =>
+  {icons.map(({ href, label, icon, }, index) =>
     href ? (
       <a
         key={label}

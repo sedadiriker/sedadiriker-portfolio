@@ -83,7 +83,7 @@ export default function Contact() {
         subject: "",
         message: "",
       });
-    } catch (err) {
+    } catch {
       setError("Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.");
     } finally {
       setLoading(false);
