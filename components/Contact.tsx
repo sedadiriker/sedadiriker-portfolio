@@ -44,51 +44,34 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function validateEmail(email: string) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
+  e.preventDefault();
+  setError(null);
+  setSuccess(false);
+  setLoading(true);
 
-    if (!formData.name.trim()) {
-      setError("Lütfen adınızı girin.");
-      return;
-    }
-    if (!formData.surname.trim()) {
-      setError("Lütfen soyadınızı girin.");
-      return;
-    }
-    if (!validateEmail(formData.email)) {
-      setError("Geçerli bir e-posta adresi girin.");
-      return;
-    }
-    if (!formData.message.trim()) {
-      setError("Lütfen mesajınızı yazın.");
-      return;
-    }
+  try {
+    const res = await fetch("https://formspree.io/f/mrbkvejy", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-    setLoading(true);
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
+    if (res.ok) {
       setSuccess(true);
-      setFormData({
-        name: "",
-        surname: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-    } catch {
-      setError("Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.");
-    } finally {
-      setLoading(false);
+      setFormData({ name: "", surname: "", email: "", subject: "", message: "" });
+    } else {
+      setError("Mesaj gönderilirken hata oluştu.");
     }
+  } catch {
+    setError("Mesaj gönderilirken hata oluştu.");
+  } finally {
+    setLoading(false);
   }
+}
+
 
   return (
     <div className="h-screen flex flex-col justify-center items-center px-6 w-7xl max-w-7xl text-center">
@@ -106,9 +89,10 @@ export default function Contact() {
       />
 
       <form
-        onSubmit={handleSubmit}
+       onSubmit={handleSubmit}
         className="w-full flex flex-col gap-5 text-left"
         noValidate
+          method="POST" 
       >
         {/* Ad ve Soyad yan yana */}
         <div className="flex flex-col md:flex-row gap-4">
