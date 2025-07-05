@@ -11,8 +11,22 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-[#F7F7F7] relative">
       <Head>
-        <title>Seda Diriker | Portfolio</title>
-      </Head>
+  <title>Seda Diriker | Portfolio</title>
+  <link rel="icon" href="/logo.png" />
+
+  <meta property="og:title" content="Seda Diriker | Portfolio" />
+  <meta property="og:description" content="Kullanıcı odaklı, yüksek performanslı web ve mobil uygulamalar geliştiriyorum." />
+  <meta property="og:image" content="https://www.sedadiriker.dev/logo.png" />
+  <meta property="og:url" content="https://www.sedadiriker.dev" />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Seda Diriker | Portfolio" />
+  <meta name="twitter:description" content="Kullanıcı odaklı, yüksek performanslı web ve mobil uygulamalar geliştiriyorum." />
+  <meta name="twitter:image" content="https://www.sedadiriker.dev/logo.png" />
+</Head>
+
 
       <SocialIcons />
 
