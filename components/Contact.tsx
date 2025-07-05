@@ -44,38 +44,6 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-async function handleSubmit(e: React.FormEvent) {
-  e.preventDefault();
-  setError(null);
-  setSuccess(false);
-  setLoading(true);
-
-  try {
-    const form = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      form.append(key, value);
-    });
-
-    const res = await fetch("https://formspree.io/f/mrbkvejy", {
-      method: "POST",
-      body: form,
-      redirect: 'manual',
-    });
-
-    if (res.ok) {
-      setSuccess(true);
-      setFormData({ name: "", surname: "", email: "", subject: "", message: "" });
-    } else {
-      setError("Mesaj gönderilirken hata oluştu.");
-    }
-  } catch {
-    setError("Mesaj gönderilirken hata oluştu.");
-  } finally {
-    setLoading(false);
-  }
-}
-
-
 
   return (
     <div className="h-screen flex flex-col justify-center items-center px-6 w-7xl max-w-7xl text-center">
@@ -93,46 +61,58 @@ async function handleSubmit(e: React.FormEvent) {
       />
 
       <form
-       onSubmit={handleSubmit}
+         action="https://formspree.io/f/mrbkvejy"
         className="w-full flex flex-col gap-5 text-left"
         noValidate
           method="POST" 
       >
         {/* Ad ve Soyad yan yana */}
         <div className="flex flex-col md:flex-row gap-4">
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Adınız"
-            value={formData.name}
-            onChange={handleChange}
-            disabled={loading}
-            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-            required
-          />
-          <input
-            id="surname"
-            name="surname"
-            type="text"
-            placeholder="Soyadınız"
-            value={formData.surname}
-            onChange={handleChange}
-            disabled={loading}
-            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-            required
-          />
-          <input
-            id="subject"
-            name="subject"
-            type="text"
-            placeholder="Konu"
-            value={formData.subject}
-            onChange={handleChange}
-            disabled={loading}
-            className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
-          />
-        </div>
+  <input
+    id="name"
+    name="name"
+    type="text"
+    placeholder="Adınız"
+    value={formData.name}
+    onChange={handleChange}
+    disabled={loading}
+    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+    required
+  />
+  <input
+    id="surname"
+    name="surname"
+    type="text"
+    placeholder="Soyadınız"
+    value={formData.surname}
+    onChange={handleChange}
+    disabled={loading}
+    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+    required
+  />
+  <input
+    id="email"
+    name="email"
+    type="email"
+    placeholder="Email adresiniz"
+    value={formData.email}
+    onChange={handleChange}
+    disabled={loading}
+    required
+    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+  />
+  <input
+    id="subject"
+    name="subject"
+    type="text"
+    placeholder="Konu"
+    value={formData.subject}
+    onChange={handleChange}
+    disabled={loading}
+    className="p-3 rounded bg-gray-50 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E38422] focus:border-transparent transition w-full"
+  />
+</div>
+
 
         <textarea
           id="message"
