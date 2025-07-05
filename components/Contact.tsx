@@ -43,20 +43,22 @@ export default function Contact() {
   ) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-
-  async function handleSubmit(e: React.FormEvent) {
+  
+async function handleSubmit(e: React.FormEvent) {
   e.preventDefault();
   setError(null);
   setSuccess(false);
   setLoading(true);
 
   try {
+    const form = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      form.append(key, value);
+    });
+
     const res = await fetch("https://formspree.io/f/mrbkvejy", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      body: form,
     });
 
     if (res.ok) {
@@ -71,6 +73,7 @@ export default function Contact() {
     setLoading(false);
   }
 }
+
 
 
   return (
