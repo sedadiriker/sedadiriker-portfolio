@@ -43,7 +43,7 @@ export default function Contact() {
   ) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-  
+
 async function handleSubmit(e: React.FormEvent) {
   e.preventDefault();
   setError(null);
@@ -59,6 +59,7 @@ async function handleSubmit(e: React.FormEvent) {
     const res = await fetch("https://formspree.io/f/mrbkvejy", {
       method: "POST",
       body: form,
+      redirect: 'manual',
     });
 
     if (res.ok) {
