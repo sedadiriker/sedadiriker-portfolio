@@ -38,7 +38,7 @@ export default function Work() {
         "DRF",
         "PostgreSQL",
         "PostGIS",
-        "Leaflet",
+        "OpenLayers",
         "Celery",
         "WeasyPrint",
         "Matplotlib",
