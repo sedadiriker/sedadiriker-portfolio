@@ -34,32 +34,32 @@ export default function Home() {
 
       <main className="flex-grow w-full scroll-smooth">
         <section
-          id="home"
+          id="anasayfa"
           className="md:min-h-screen flex items-center justify-center pt-20"
         >
           <Hero />
         </section>
         <section
-          id="about"
+          id="hakkımda"
           className="md:h-screen flex items-center justify-center"
         >
           <About />
         </section>
         <section
-          id="skills"
+          id="yetenekler"
           className="md:h-screen flex items-center justify-center"
         >
           <Skills />
         </section>
         <section
-          id="work"
+          id="proje"
           className="md:h-screen flex items-center justify-center"
         >
           <Work />
         </section>
 
         <section
-          id="contact"
+          id="iletisim"
             style={{ height: "calc(100vh - 64px)" }} 
           className=" flex items-center justify-center"
         >

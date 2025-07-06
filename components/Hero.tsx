@@ -34,7 +34,7 @@ export default function Hero() {
         {/* Buton */}
         <div className="flex w-full justify-center md:justify-end">
           <Link
-            href="/#about"
+            href="/#hakkımda"
             className="relative inline-block px-10 py-3 text-[#E38422] font-semibold rounded-md bg-transparent overflow-hidden cursor-pointer hover:text-white hover:bg-[#47586F] me-5"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}

@@ -10,15 +10,15 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { id: "home", label: "Ana Sayfa" },
-  { id: "about", label: "Hakkımda" },
-  { id: "skills", label: "Yeteneklerim" },
-  { id: "work", label: "Projeler" },
-  { id: "contact", label: "İletişim" },
+  { id: "anasayfa", label: "Ana Sayfa" },
+  { id: "hakkımda", label: "Hakkımda" },
+  { id: "yetenekler", label: "Yeteneklerim" },
+  { id: "proje", label: "Projeler" },
+  { id: "iletisim", label: "İletişim" },
 ];
 
 export default function Header() {
-  const [activeSection, setActiveSection] = useState<string>("home");
+  const [activeSection, setActiveSection] = useState<string>("anasayfa");
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Header() {
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
 
-      let current = "home";
+      let current = "anasayfa";
       navItems.forEach((item) => {
         const section = document.getElementById(item.id);
         if (section && section.offsetTop - 100 <= scrollY) {
@@ -55,7 +55,7 @@ export default function Header() {
     >
       <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* LOGO */}
-        <Link href="#home" className="flex items-center gap-2">
+        <Link href="#anasayfa" className="flex items-center gap-2">
           <Image
             src="/logo.png"
             alt="Logo"

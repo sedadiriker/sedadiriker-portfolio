@@ -11,7 +11,7 @@ export default function Work() {
     {
       title: "DSİ Kurum Yönetim Paneli (KYP)",
       description:
-        "React tabanlı frontend ve Django REST API backend ile kurumların makine ve operasyon takibini sağlayan yönetim panelini geliştirdim.",
+        "Kurumların makine parkı, saha faaliyetleri ve operasyon süreçlerini yönetmelerini sağlayan web tabanlı bir panel geliştirdim. Frontend'de React ve Redux Toolkit, backend'de Django REST Framework kullandım. Harita modülleri için OpenLayers ile gelişmiş etkileşimli görselleştirme sağladım.",
       stack: [
         "React 18",
         "Redux Toolkit",
@@ -29,17 +29,41 @@ export default function Work() {
       date: "2024 - Devam",
     },
     {
-      title: "DSİ TAMBİS Mobil Uygulaması",
+      title: "DSİ TAMBİS Web ",
       description:
-        "Taşkın Bilgi Sistemi mobil uygulamasının geliştirilmesinde, React Native ile offline ihbar ve harita entegrasyonu modülleri üzerinde çalıştım.",
-      stack: ["React Native", "Offline Storage", "Leaflet"],
+        "Taşkın Bilgi Sistemi (TAMBİS) web uygulamasında, Django REST Framework ile veri yönetimi, sorgulama ve analiz modüllerinin geliştirilmesinde aktif rol aldım. PostgreSQL + PostGIS altyapısı ve harita tabanlı işlevler üzerinde yoğun şekilde çalıştım.",
+
+      stack: [
+        "Django",
+        "DRF",
+        "PostgreSQL",
+        "PostGIS",
+        "Leaflet",
+        "Celery",
+        "WeasyPrint",
+        "Matplotlib",
+        "GeoPandas",
+        "Redis",
+        "Zeep",
+        "scikit-learn",
+      ],
       date: "2024 - Devam",
     },
     {
-      title: "DSİ TAMBİS Web Uygulaması",
+      title: "DSİ TAMBİS Mobil Uygulaması",
       description:
-        "Taşkın Bilgi Sistemi web uygulamasında Django ve PostgreSQL kullanarak veri analizi ve yönetim modüllerini geliştirdim.",
-      stack: ["Django", "PostgreSQL", "Leaflet"],
+        "Taşkın Bilgi Sistemi (TAMBİS) mobil uygulamasında React Native ve Expo kullanarak harita entegrasyonu, offline ihbar kaydı, medya yükleme ve konum servisleri gibi temel modüllerin geliştirilmesinde etkin rol aldım.",
+      stack: [
+        "React Native",
+        "Expo",
+        "Redux Toolkit",
+        "Offline Storage",
+        "React Native Maps",
+        "Axios",
+        "AsyncStorage",
+        "Expo Location",
+        "Media Upload",
+      ],
       date: "2024 - Devam",
     },
   ];
@@ -71,13 +95,13 @@ export default function Work() {
     >
       <div className="flex flex-col justify-center items-center">
         <h2 className="text-3xl sm:text-4xl font-extrabold mb-2 text-[#1D204A] text-center">
-        Projeler
-      </h2>
-      <div
-        className={`h-1 rounded-full bg-[#E38422] mb-10 transition-all duration-1000 ${
-          visible ? "w-24 opacity-100" : "w-0 opacity-0"
-        }`}
-      ></div>
+          Projeler
+        </h2>
+        <div
+          className={`h-1 rounded-full bg-[#E38422] mb-10 transition-all duration-1000 ${
+            visible ? "w-24 opacity-100" : "w-0 opacity-0"
+          }`}
+        ></div>
       </div>
 
       {/* Proje Kartları */}

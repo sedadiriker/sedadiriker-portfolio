@@ -60,20 +60,20 @@ export default function About() {
   const buttons = [
     {
       id: 1,
-      href: "#contact",
+      href: "#iletisim",
       text: "İletişime Geç",
       isDownload: false,
       className: "text-[#E38422] font-semibold",
       hoverTextColor: "hover:text-white hover:bg-[#47586F]",
     },
-    {
-      id: 2,
-      href: "/CV-Seda-Diriker.pdf",
-      text: "CV İndir",
-      isDownload: true,
-      className: "text-[#E38422] font-semibold",
-      hoverTextColor: "hover:text-white hover:bg-[#47586F]",
-    },
+    // {
+    //   id: 2,
+    //   href: "/CV-Seda-Diriker.pdf",
+    //   text: "CV İndir",
+    //   isDownload: true,
+    //   className: "text-[#E38422] font-semibold",
+    //   hoverTextColor: "hover:text-white hover:bg-[#47586F]",
+    // },
   ];
 
   return (
